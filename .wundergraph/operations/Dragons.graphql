@@ -1,0 +1,7 @@
+# .wundergraph/operations/Dragons.graphql
+query Dragons {
+  spacex_dragons {
+    name
+    active
+  }
+}

@@ -1,0 +1,10 @@
+query AllDrugs{
+	backend_drugs{
+		data{
+			id
+			attributes {
+				title
+			}
+		}
+	}
+}

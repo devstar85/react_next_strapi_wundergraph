@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../wundergraph.server.ts"],
+  "sourcesContent": ["import { GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql';\nimport { configureWunderGraphServer } from '@wundergraph/sdk/server';\nimport type { HooksConfig } from './generated/wundergraph.hooks';\nimport type { InternalClient } from './generated/wundergraph.internal.client';\n\nexport default configureWunderGraphServer<HooksConfig, InternalClient>(() => ({\n\thooks: {\n\t\tqueries: {},\n\t\tmutations: {},\n\t},\n}));\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AACA,oBAA2C;AAI3C,IAAO,iCAAQ,0CAAwD,OAAO;AAAA,EAC7E,OAAO;AAAA,IACN,SAAS,CAAC;AAAA,IACV,WAAW,CAAC;AAAA,EACb;AACD,EAAE;",
+  "names": []
+}

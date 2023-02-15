@@ -1,0 +1,10 @@
+mutation newDrug() {
+  backend_createDrug(data: {title: "tutu"}) {
+    data{
+            id
+          attributes {
+            title
+      }
+    }
+  }
+}

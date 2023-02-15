@@ -1,0 +1,42 @@
+{
+  "graphql_operation_files": [
+    {
+      "operation_name": "Alldrugs",
+      "api_mount_path": "Alldrugs",
+      "file_path": "Alldrugs.graphql",
+      "content": "query Alldrugs {backend_drugs {data {id attributes {title}}}}"
+    },
+    {
+      "operation_name": "Dragons",
+      "api_mount_path": "Dragons",
+      "file_path": "Dragons.graphql",
+      "content": "query Dragons {spacex_dragons {name active}}"
+    },
+    {
+      "operation_name": "NewDrug",
+      "api_mount_path": "newDrug",
+      "file_path": "newDrug.graphql",
+      "content": "mutation NewDrug {backend_createDrug(data: {title: \"tutu\"}){data {id attributes {title}}}}"
+    }
+  ],
+  "typescript_operation_files": [
+    {
+      "operation_name": "UsersGet",
+      "api_mount_path": "users/get",
+      "file_path": "users\\get.ts",
+      "module_path": "generated/bundle/operations/users/get"
+    },
+    {
+      "operation_name": "UsersSubscribe",
+      "api_mount_path": "users/subscribe",
+      "file_path": "users\\subscribe.ts",
+      "module_path": "generated/bundle/operations/users/subscribe"
+    },
+    {
+      "operation_name": "UsersUpdate",
+      "api_mount_path": "users/update",
+      "file_path": "users\\update.ts",
+      "module_path": "generated/bundle/operations/users/update"
+    }
+  ]
+}
