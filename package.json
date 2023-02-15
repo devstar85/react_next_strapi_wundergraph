@@ -4,12 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build:wundergraph": "wunderctl generate --debug",
+    "build:next": "next build",
+    "build": "npm run build:wundergraph && npm run build:next",
     "start": "next start",
     "export": "next export",
     "lint": "eslint --fix \"src/**/*.{js,jsx}\"",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
-    "build:icons": "tsc -b src/iconify-bundle && node src/iconify-bundle/bundle-icons-react.js"
+    "build:icons": "tsc -b src/iconify-bundle && node src/iconify-bundle/bundle-icons-react.js",
+    "wundergraph": "wunderctl up",
+    "wunderctl": "wunderctl"
   },
   "dependencies": {
     "@babel/core": "7.19.6",
@@ -71,7 +75,11 @@
     "recharts": "2.1.16",
     "stylis": "4.1.3",
     "stylis-plugin-rtl": "2.1.1",
-    "yup": "0.32.11"
+    "yup": "0.32.11",
+    "@wundergraph/nextjs": "^0.8.7",
+    "@wundergraph/sdk": "^0.134.0",
+    "graphql": "^16.3.0",
+    "@wundergraph/react-query": "^0.5.5"
   },
   "devDependencies": {
     "@iconify/iconify": "3.0.0",
