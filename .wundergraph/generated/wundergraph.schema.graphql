@@ -3,6 +3,8 @@
 """"""
 directive @spacex_rateLimit(identityArgs: [String], max: Int, message: String, window: String) on FIELD_DEFINITION
 
+directive @fromClaim(name: Claim) on VARIABLE_DEFINITION
+
 """
 The @removeNullVariables directive allows you to remove variables with null value from your GraphQL Query or Mutation Operations.
 
@@ -155,12 +157,6 @@ directive @rbac(
   """the user must not match any of the roles"""
   denyMatchAny: [WG_ROLE]
 ) on QUERY | MUTATION | SUBSCRIPTION
-
-"""
-The @fromClaim directive sets the variable to the value retrieved from the given a claim.
-Adding this directive makes the operation require authentication.
-"""
-directive @fromClaim(name: WG_CLAIM) on VARIABLE_DEFINITION
 
 """
 The directive @injectCurrentDateTime injects a DateTime string of the current date and time into the variable.
@@ -1784,6 +1780,16 @@ type backend_UsersPermissionsUserRelationResponseCollection {
   _join: Query!
 }
 
+enum Claim {
+  USERID
+  EMAIL
+  EMAIL_VERIFIED
+  NAME
+  NICKNAME
+  LOCATION
+  PROVIDER
+}
+
 enum COMMON_REGEX_PATTERN {
   EMAIL
   DOMAIN
@@ -1792,50 +1798,6 @@ enum COMMON_REGEX_PATTERN {
 enum WG_ROLE {
   admin
   user
-}
-
-"""Well known claims - https://www.iana.org/assignments/jwt/jwt.xhtml"""
-enum WG_CLAIM {
-  """iss"""
-  ISSUER
-  """deprecated alias for ISSUER"""
-  PROVIDER
-  """sub"""
-  SUBJECT
-  """alias for sub"""
-  USERID
-  """name"""
-  NAME
-  """given_name"""
-  GIVEN_NAME
-  """family_name"""
-  FAMILY_NAME
-  """middle_name"""
-  MIDDLE_NAME
-  """nickname"""
-  NICKNAME
-  """preferred_username"""
-  PREFERRED_USERNAME
-  """profile"""
-  PROFILE
-  """picture"""
-  PICTURE
-  """website"""
-  WEBSITE
-  """email"""
-  EMAIL
-  """email_verified"""
-  EMAIL_VERIFIED
-  """gender"""
-  GENDER
-  """birthdate"""
-  BIRTH_DATE
-  """zoneinfo"""
-  ZONE_INFO
-  """locale"""
-  LOCALE
-  """location"""
-  LOCATION
 }
 
 enum WunderGraphDateTimeFormat {

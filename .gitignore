@@ -8,6 +8,10 @@ node_modules/
 dist/
 .next/
 
+#wundergraph build
+components/
+
+
 # Compiled Java class files
 *.class
 

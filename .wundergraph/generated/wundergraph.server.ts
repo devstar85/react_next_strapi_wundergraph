@@ -2,12 +2,11 @@
 
 import type { HooksConfig } from "./wundergraph.hooks";
 import type { InternalClient } from "./wundergraph.internal.client";
-import type { CustomClaims } from "./claims";
 import type { GraphQLServerConfig, BaseRequestContext, WunderGraphUser } from "@wundergraph/sdk/server";
 
 export type Role = "admin" | "user";
 
-export interface User extends WunderGraphUser<Role, CustomClaims> {}
+export interface User extends WunderGraphUser<Role> {}
 
 export interface Config {
 	hooks: HooksConfig;

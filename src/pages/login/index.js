@@ -44,6 +44,8 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 // ** Demo Imports
 import FooterIllustrationsV2 from 'src/views/pages/auth/FooterIllustrationsV2'
 
+import {useMutation, useQuery} from '../../hooks/useWundergraph'
+
 // ** Styled Components
 const LoginIllustrationWrapper = styled(Box)(({ theme }) => ({
   padding: theme.spacing(20),
@@ -129,9 +131,11 @@ const LoginPage = () => {
     mode: 'onBlur',
     resolver: yupResolver(schema)
   })
+  
 
-  const onSubmit = data => {
-    const { email, password } = data
+  const onSubmit = data1 => {
+    const { email, password } = data1
+    
     auth.login({ email, password, rememberMe }, () => {
       setError('email', {
         type: 'manual',

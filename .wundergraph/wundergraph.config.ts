@@ -1,5 +1,4 @@
 import { configureWunderGraphApplication, cors, EnvironmentVariable, introspect, templates } from '@wundergraph/sdk';
-import { NextJsTemplate } from '@wundergraph/nextjs/dist/template';
 import server from './wundergraph.server';
 import operations from './wundergraph.operations';
 
@@ -21,7 +20,7 @@ configureWunderGraphApplication({
 			templates: [...templates.typescript.all],
 		},
 		{
-			templates: [new NextJsTemplate()],
+			templates: [templates.typescript.client],
 			path: '../components/generated',
 		},
 	],

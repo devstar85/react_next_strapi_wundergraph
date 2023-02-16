@@ -27,6 +27,7 @@ export interface OperationsConfiguration {
 	custom?: {
 		Alldrugs?: CustomizeQuery;
 		Dragons?: CustomizeQuery;
+		Login?: CustomizeMutation;
 		NewDrug?: CustomizeMutation;
 		UsersGet?: CustomizeQuery;
 		UsersSubscribe?: CustomizeSubscription;

@@ -12,13 +12,14 @@ import {
 	SubscriptionEventHandler,
 	FetchUserRequestOptions,
 } from "@wundergraph/sdk/client";
-
-import type { CustomClaims } from "./claims";
 import type {
 	AlldrugsResponse,
 	AlldrugsResponseData,
 	DragonsResponse,
 	DragonsResponseData,
+	LoginResponse,
+	LoginInput,
+	LoginResponseData,
 	NewDrugResponse,
 	NewDrugResponseData,
 	UsersGetResponse,
@@ -38,9 +39,9 @@ export const WUNDERGRAPH_S3_ENABLED = false;
 export const WUNDERGRAPH_AUTH_ENABLED = false;
 
 export const defaultClientConfig: ClientConfig = {
-	applicationHash: "4b5ab5f4",
+	applicationHash: "d5831bb1",
 	baseURL: "http://localhost:9991",
-	sdkVersion: "0.135.0",
+	sdkVersion: "0.134.0",
 };
 
 export const operationMetadata: OperationMetadata = {
@@ -48,6 +49,9 @@ export const operationMetadata: OperationMetadata = {
 		requiresAuthentication: false,
 	},
 	Dragons: {
+		requiresAuthentication: false,
+	},
+	Login: {
 		requiresAuthentication: false,
 	},
 	newDrug: {
@@ -94,7 +98,7 @@ export class WunderGraphClient extends Client {
 	public login(authProviderID: Operations["authProvider"], redirectURI?: string) {
 		return super.login(authProviderID, redirectURI);
 	}
-	public async fetchUser<TUser extends User = User<UserRole, CustomClaims>>(options?: FetchUserRequestOptions) {
+	public async fetchUser<TUser extends User = User<UserRole>>(options?: FetchUserRequestOptions) {
 		return super.fetchUser<TUser>(options);
 	}
 }
@@ -130,6 +134,11 @@ export type Queries = {
 };
 
 export type Mutations = {
+	Login: {
+		input: LoginInput;
+		data: LoginResponseData;
+		requiresAuthentication: false;
+	};
 	newDrug: {
 		input?: undefined;
 		data: NewDrugResponseData;

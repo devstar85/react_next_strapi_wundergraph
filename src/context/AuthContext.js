@@ -10,6 +10,7 @@ import _axios from "../configs/axios";
 
 // ** Config
 import authConfig from 'src/configs/auth'
+import { useQuery, useMutation } from '../hooks/useWundergraph';
 
 // ** Defaults
 const defaultProvider = {
@@ -69,7 +70,32 @@ const AuthProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  var loginErrorCallback;
+  const { data, mutate, mutateAsync } = useMutation({
+    operationName: 'Login',
+    onSuccess: (data) => {
+      if (data.backend_login.jwt) {
+        window.localStorage.setItem(authConfig.storageTokenKeyName, data.backend_login.jwt)
+        let user = data.backend_login.user;
+        user.role='admin';
+        window.localStorage.setItem('userData', JSON.stringify(user))
+        const returnUrl = router.query.returnUrl;
+
+        setUser({ ...user })
+        const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
+        router.replace(redirectURL)
+      } else {
+        const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
+        router.replace(redirectURL)
+      }
+    },
+    onError: () => {
+      loginErrorCallback();
+    }
+  });
+
   const handleLogin = (params, errorCallback) => {
+    loginErrorCallback = errorCallback;
     // axios
     //   .post(authConfig.loginEndpoint, params)
     //   .then(async response => {
@@ -85,29 +111,32 @@ const AuthProvider = ({ children }) => {
     //   .catch(err => {
     //     if (errorCallback) errorCallback(err)
     //   })
-    _axios.post('/auth/local', {'identifier': params.email, 'password' : params.password}).then(res => {
-      if(res.data.jwt) {
-        window.localStorage.setItem(authConfig.storageTokenKeyName, res.data.jwt)
-        let user = res.data.user;
-        if(params.Level==1) user.role = "admin";
-        else if(params.Level==2) user.role = "client";
-        else user.role = "admin";
-        user.fullName = params.username;
-        user.password = params.password;
-        window.localStorage.setItem('userData', JSON.stringify(user))
-        const returnUrl = router.query.returnUrl;
-        
-        console.log(user);
-        setUser({ ...user })
-        const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
-        router.replace(redirectURL)
-      }else {
-        const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
-        router.replace(redirectURL)
-      }
-    }).catch((err) => {
-      if (errorCallback) errorCallback(err)
-    });
+
+    mutate({ identifier: params.email, password: params.password });
+
+    // _axios.post('/auth/local', {'identifier': params.email, 'password' : params.password}).then(res => {
+    //   if(res.data.jwt) {
+    //     window.localStorage.setItem(authConfig.storageTokenKeyName, res.data.jwt)
+    //     let user = res.data.user;
+    //     if(params.Level==1) user.role = "admin";
+    //     else if(params.Level==2) user.role = "client";
+    //     else user.role = "admin";
+    //     user.fullName = params.username;
+    //     user.password = params.password;
+    //     window.localStorage.setItem('userData', JSON.stringify(user))
+    //     const returnUrl = router.query.returnUrl;
+
+    //     console.log(user);
+    //     setUser({ ...user })
+    //     const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
+    //     router.replace(redirectURL)
+    //   }else {
+    //     const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
+    //     router.replace(redirectURL)
+    //   }
+    // }).catch((err) => {
+    //   if (errorCallback) errorCallback(err)
+    // });
   }
 
   const handleLogout = () => {

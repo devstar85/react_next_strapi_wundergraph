@@ -61,7 +61,7 @@ var spaceX = import_sdk2.introspect.graphql({
     },
     {
       templates: [import_sdk2.templates.typescript.client],
-      path: "../src/components/generated"
+      path: "../components/generated"
     }
   ],
   cors: {

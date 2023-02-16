@@ -12,6 +12,10 @@ interface Schema {
 		input: JSONSchema7;
 		response: JSONSchema7;
 	};
+	Login: {
+		input: JSONSchema7;
+		response: JSONSchema7;
+	};
 	NewDrug: {
 		input: JSONSchema7;
 		response: JSONSchema7;
@@ -86,6 +90,42 @@ const jsonSchema: Schema = {
 						},
 					},
 					additionalProperties: false,
+				},
+			},
+			additionalProperties: false,
+		},
+	},
+	Login: {
+		input: {
+			type: "object",
+			properties: { identifier: { type: "string" }, password: { type: "string" } },
+			additionalProperties: false,
+			definitions: {},
+			required: ["identifier", "password"],
+		},
+		response: {
+			type: "object",
+			properties: {
+				data: {
+					type: "object",
+					properties: {
+						backend_login: {
+							type: "object",
+							properties: {
+								jwt: { type: "string" },
+								user: {
+									type: "object",
+									properties: { id: { type: "string" }, username: { type: "string" }, email: { type: "string" } },
+									additionalProperties: false,
+									required: ["id", "username"],
+								},
+							},
+							additionalProperties: false,
+							required: ["user"],
+						},
+					},
+					additionalProperties: false,
+					required: ["backend_login"],
 				},
 			},
 			additionalProperties: false,

@@ -4,6 +4,10 @@ import type { OperationArgsWithInput, InternalClient as BaseClient } from "@wund
 import {
 	AlldrugsResponse,
 	DragonsResponse,
+	LoginResponse,
+	LoginInput,
+	InternalLoginInput,
+	InjectedLoginInput,
 	NewDrugResponse,
 	UsersGetResponse,
 	UsersGetInput,
@@ -23,6 +27,7 @@ export interface Queries {
 }
 
 export interface Mutations {
+	Login: (options: OperationArgsWithInput<LoginInput>) => Promise<LoginResponse>;
 	NewDrug: () => Promise<NewDrugResponse>;
 	UsersUpdate: (options: OperationArgsWithInput<UsersUpdateInput>) => Promise<UsersUpdateResponse>;
 }

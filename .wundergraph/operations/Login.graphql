@@ -1,0 +1,10 @@
+mutation Login($identifier: String!, $password: String!) {
+  backend_login(input: { identifier: $identifier, password: $password }) {
+    jwt
+    user {
+      id
+      username
+      email
+    }
+  }
+}

@@ -14,11 +14,21 @@ export interface GraphQLError {
 	path?: ReadonlyArray<string | number>;
 }
 
+export interface LoginInput {
+	identifier: string;
+	password: string;
+}
+
 export type UsersGetInput = ExtractInput<typeof function_UsersGet>;
 
 export type UsersSubscribeInput = ExtractInput<typeof function_UsersSubscribe>;
 
 export type UsersUpdateInput = ExtractInput<typeof function_UsersUpdate>;
+
+export interface InternalLoginInput {
+	identifier: string;
+	password: string;
+}
 
 export interface InternalUsersGetInput {
 	id: string;
@@ -34,6 +44,11 @@ export interface InternalUsersUpdateInput {
 	bio: string;
 }
 
+export interface InjectedLoginInput {
+	identifier: string;
+	password: string;
+}
+
 export interface AlldrugsResponse {
 	data?: AlldrugsResponseData;
 	errors?: ReadonlyArray<GraphQLError>;
@@ -41,6 +56,11 @@ export interface AlldrugsResponse {
 
 export interface DragonsResponse {
 	data?: DragonsResponseData;
+	errors?: ReadonlyArray<GraphQLError>;
+}
+
+export interface LoginResponse {
+	data?: LoginResponseData;
 	errors?: ReadonlyArray<GraphQLError>;
 }
 
@@ -80,6 +100,17 @@ export interface DragonsResponseData {
 		name?: string;
 		active?: boolean;
 	}[];
+}
+
+export interface LoginResponseData {
+	backend_login: {
+		jwt?: string;
+		user: {
+			id: string;
+			username: string;
+			email?: string;
+		};
+	};
 }
 
 export interface NewDrugResponseData {
