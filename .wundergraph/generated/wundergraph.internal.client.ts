@@ -3,6 +3,10 @@
 import type { OperationArgsWithInput, InternalClient as BaseClient } from "@wundergraph/sdk/server";
 import {
 	AlldrugsResponse,
+	CreateUserResponse,
+	CreateUserInput,
+	InternalCreateUserInput,
+	InjectedCreateUserInput,
 	DragonsResponse,
 	LoginResponse,
 	LoginInput,
@@ -27,6 +31,7 @@ export interface Queries {
 }
 
 export interface Mutations {
+	CreateUser: (options: OperationArgsWithInput<CreateUserInput>) => Promise<CreateUserResponse>;
 	Login: (options: OperationArgsWithInput<LoginInput>) => Promise<LoginResponse>;
 	NewDrug: () => Promise<NewDrugResponse>;
 	UsersUpdate: (options: OperationArgsWithInput<UsersUpdateInput>) => Promise<UsersUpdateResponse>;

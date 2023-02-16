@@ -3,6 +3,10 @@
 import type { Operation } from "@wundergraph/sdk/server";
 import {
 	AlldrugsResponse,
+	CreateUserResponse,
+	CreateUserInput,
+	InternalCreateUserInput,
+	InjectedCreateUserInput,
 	DragonsResponse,
 	LoginResponse,
 	LoginInput,
@@ -27,6 +31,7 @@ export interface Queries {
 }
 
 export interface Mutations {
+	CreateUser: { input: InternalCreateUserInput; response: CreateUserResponse };
 	Login: { input: InternalLoginInput; response: LoginResponse };
 	newDrug: { input: never; response: NewDrugResponse };
 	"users/update": { input: InternalUsersUpdateInput; response: UsersUpdateResponse };

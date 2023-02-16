@@ -14,6 +14,24 @@ export interface GraphQLError {
 	path?: ReadonlyArray<string | number>;
 }
 
+export interface CreateUserInput {
+	username: string;
+	email: string;
+	provider: string;
+	password: string;
+	resetPasswordToken: string;
+	confirmationToken: string;
+	confirmed: boolean;
+	blocked: boolean;
+	role: string;
+	Level: number;
+	userRole: string;
+	avatar: number;
+	company: string;
+	contact: number;
+	plan: string;
+}
+
 export interface LoginInput {
 	identifier: string;
 	password: string;
@@ -24,6 +42,24 @@ export type UsersGetInput = ExtractInput<typeof function_UsersGet>;
 export type UsersSubscribeInput = ExtractInput<typeof function_UsersSubscribe>;
 
 export type UsersUpdateInput = ExtractInput<typeof function_UsersUpdate>;
+
+export interface InternalCreateUserInput {
+	username: string;
+	email: string;
+	provider: string;
+	password: string;
+	resetPasswordToken: string;
+	confirmationToken: string;
+	confirmed: boolean;
+	blocked: boolean;
+	role: string;
+	Level: number;
+	userRole: string;
+	avatar: number;
+	company: string;
+	contact: number;
+	plan: string;
+}
 
 export interface InternalLoginInput {
 	identifier: string;
@@ -44,6 +80,24 @@ export interface InternalUsersUpdateInput {
 	bio: string;
 }
 
+export interface InjectedCreateUserInput {
+	username: string;
+	email: string;
+	provider: string;
+	password: string;
+	resetPasswordToken: string;
+	confirmationToken: string;
+	confirmed: boolean;
+	blocked: boolean;
+	role: string;
+	Level: number;
+	userRole: string;
+	avatar: number;
+	company: string;
+	contact: number;
+	plan: string;
+}
+
 export interface InjectedLoginInput {
 	identifier: string;
 	password: string;
@@ -51,6 +105,11 @@ export interface InjectedLoginInput {
 
 export interface AlldrugsResponse {
 	data?: AlldrugsResponseData;
+	errors?: ReadonlyArray<GraphQLError>;
+}
+
+export interface CreateUserResponse {
+	data?: CreateUserResponseData;
 	errors?: ReadonlyArray<GraphQLError>;
 }
 
@@ -92,6 +151,14 @@ export interface AlldrugsResponseData {
 				title?: string;
 			};
 		}[];
+	};
+}
+
+export interface CreateUserResponseData {
+	backend_createUsersPermissionsUser: {
+		data?: {
+			id?: string;
+		};
 	};
 }
 

@@ -152,6 +152,166 @@
       },
       "item": [
         {
+          "id": "CreateUser",
+          "name": "CreateUser",
+          "request": {
+            "url": {
+              "path": [
+                "operations",
+                "CreateUser"
+              ],
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "username",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "email",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "provider",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "password",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "resetPasswordToken",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "confirmationToken",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type boolean, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "confirmed",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type boolean, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "blocked",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "role",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type integer, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "Level",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "userRole",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type integer, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "avatar",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "company",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type integer, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "contact",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "plan",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        {
           "id": "Login",
           "name": "Login",
           "request": {

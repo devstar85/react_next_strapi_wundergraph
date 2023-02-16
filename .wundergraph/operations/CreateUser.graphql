@@ -9,27 +9,34 @@ mutation CreateUser(
         $blocked:Boolean!,
         $role:ID!,
         $Level:Int!,
+        $userRole:String!,
         $avatar:Int!,
         $company:String!,
         $contact:Int!,
-        $plan:Int!
+        $plan:String!
     ){
     backend_createUsersPermissionsUser(
-        username:$username,
-        email:$email,
-        provider:$provider,
-        password:$password,
-        resetPasswordToken:$resetPasswordToken,
-        confirmationToken:$confirmationToken,
-        confirmed:$confirmed,
-        blocked:$blocked,
-        role:$role,
-        Level:$Level,
-        avatar:$avatar,
-        company:$company,
-        contact:$contact,
-        plan:$plan
+        data:{
+            username:$username,
+            email:$email,
+            provider:$provider,
+            password:$password,
+            resetPasswordToken:$resetPasswordToken,
+            confirmationToken:$confirmationToken,
+            confirmed:$confirmed,
+            blocked:$blocked,
+            role:$role,
+            Level:$Level,
+            avatar:$avatar,
+            userRole:$userRole
+            company:$company,
+            contact:$contact,
+            plan:$plan
+            
+        }
     ){
-        id
+        data{
+            id
+        }
     }
 }

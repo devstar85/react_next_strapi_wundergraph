@@ -45,7 +45,8 @@ var wundergraph_operations_default = (0, import_sdk.configureWunderGraphOperatio
 // wundergraph.config.ts
 var strapi = import_sdk2.introspect.graphql({
   apiNamespace: "backend",
-  url: "http://localhost:1337/graphql"
+  url: "http://localhost:1337/graphql",
+  headers: (builder) => builder.addClientRequestHeader("Authorization", "Authorization")
 });
 var spaceX = import_sdk2.introspect.graphql({
   apiNamespace: "spacex",

@@ -10,7 +10,7 @@
       "operation_name": "CreateUser",
       "api_mount_path": "CreateUser",
       "file_path": "CreateUser.graphql",
-      "content": ""
+      "content": "mutation CreateUser($username: String!, $email: String!, $provider: String!, $password: String!, $resetPasswordToken: String!, $confirmationToken: String!, $confirmed: Boolean!, $blocked: Boolean!, $role: ID!, $Level: Int!, $userRole: String!, $avatar: Int!, $company: String!, $contact: Int!, $plan: String!){backend_createUsersPermissionsUser(data: {username: $username,email: $email,provider: $provider,password: $password,resetPasswordToken: $resetPasswordToken,confirmationToken: $confirmationToken,confirmed: $confirmed,blocked: $blocked,role: $role,Level: $Level,avatar: $avatar,userRole: $userRole,company: $company,contact: $contact,plan: $plan}){data {id}}}"
     },
     {
       "operation_name": "Dragons",
@@ -50,11 +50,5 @@
       "file_path": "users\\update.ts",
       "module_path": "generated/bundle/operations/users/update"
     }
-  ],
-  "invalid": [
-    "CreateUser"
-  ],
-  "errors": [
-    "error normalizing operation: external: field: id not defined on type: backend_UsersPermissionsUserEntityResponse, locations: [], path: [mutation,backend_createUsersPermissionsUser,id], operationFilePath: CreateUser.graphql"
   ]
 }

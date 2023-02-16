@@ -15,6 +15,9 @@ import {
 import type {
 	AlldrugsResponse,
 	AlldrugsResponseData,
+	CreateUserResponse,
+	CreateUserInput,
+	CreateUserResponseData,
 	DragonsResponse,
 	DragonsResponseData,
 	LoginResponse,
@@ -39,13 +42,16 @@ export const WUNDERGRAPH_S3_ENABLED = false;
 export const WUNDERGRAPH_AUTH_ENABLED = false;
 
 export const defaultClientConfig: ClientConfig = {
-	applicationHash: "d5831bb1",
+	applicationHash: "d9c31aed",
 	baseURL: "http://localhost:9991",
 	sdkVersion: "0.134.0",
 };
 
 export const operationMetadata: OperationMetadata = {
 	Alldrugs: {
+		requiresAuthentication: false,
+	},
+	CreateUser: {
 		requiresAuthentication: false,
 	},
 	Dragons: {
@@ -134,6 +140,11 @@ export type Queries = {
 };
 
 export type Mutations = {
+	CreateUser: {
+		input: CreateUserInput;
+		data: CreateUserResponseData;
+		requiresAuthentication: false;
+	};
 	Login: {
 		input: LoginInput;
 		data: LoginResponseData;

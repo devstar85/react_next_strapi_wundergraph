@@ -1714,12 +1714,17 @@ type backend_UsersPermissionsUser {
   Level: Int
   avatar: Int
   blocked: Boolean
+  company: String
   confirmed: Boolean
+  contact: Int
+  country: String
   createdAt: DateTime
   email: String!
+  plan: String
   provider: String
   role: backend_UsersPermissionsRoleEntityResponse
   updatedAt: DateTime
+  userRole: String
   username: String!
   _join: Query!
 }
@@ -1746,18 +1751,23 @@ input backend_UsersPermissionsUserFiltersInput {
   and: [backend_UsersPermissionsUserFiltersInput]
   avatar: backend_IntFilterInput
   blocked: backend_BooleanFilterInput
+  company: backend_StringFilterInput
   confirmationToken: backend_StringFilterInput
   confirmed: backend_BooleanFilterInput
+  contact: backend_IntFilterInput
+  country: backend_StringFilterInput
   createdAt: backend_DateTimeFilterInput
   email: backend_StringFilterInput
   id: backend_IDFilterInput
   not: backend_UsersPermissionsUserFiltersInput
   or: [backend_UsersPermissionsUserFiltersInput]
   password: backend_StringFilterInput
+  plan: backend_StringFilterInput
   provider: backend_StringFilterInput
   resetPasswordToken: backend_StringFilterInput
   role: backend_UsersPermissionsRoleFiltersInput
   updatedAt: backend_DateTimeFilterInput
+  userRole: backend_StringFilterInput
   username: backend_StringFilterInput
 }
 
@@ -1765,13 +1775,18 @@ input backend_UsersPermissionsUserInput {
   Level: Int
   avatar: Int
   blocked: Boolean
+  company: String
   confirmationToken: String
   confirmed: Boolean
+  contact: Int
+  country: String
   email: String
   password: String
+  plan: String
   provider: String
   resetPasswordToken: String
   role: ID
+  userRole: String
   username: String
 }
 

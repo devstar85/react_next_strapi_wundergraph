@@ -26,6 +26,7 @@ export interface OperationsConfiguration {
 	// the input config is the default config + the query/mutation/subscription extra config
 	custom?: {
 		Alldrugs?: CustomizeQuery;
+		CreateUser?: CustomizeMutation;
 		Dragons?: CustomizeQuery;
 		Login?: CustomizeMutation;
 		NewDrug?: CustomizeMutation;

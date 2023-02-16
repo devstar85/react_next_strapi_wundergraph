@@ -8,6 +8,10 @@ interface Schema {
 		input: JSONSchema7;
 		response: JSONSchema7;
 	};
+	CreateUser: {
+		input: JSONSchema7;
+		response: JSONSchema7;
+	};
 	Dragons: {
 		input: JSONSchema7;
 		response: JSONSchema7;
@@ -67,6 +71,67 @@ const jsonSchema: Schema = {
 						},
 					},
 					additionalProperties: false,
+				},
+			},
+			additionalProperties: false,
+		},
+	},
+	CreateUser: {
+		input: {
+			type: "object",
+			properties: {
+				username: { type: "string" },
+				email: { type: "string" },
+				provider: { type: "string" },
+				password: { type: "string" },
+				resetPasswordToken: { type: "string" },
+				confirmationToken: { type: "string" },
+				confirmed: { type: "boolean" },
+				blocked: { type: "boolean" },
+				role: { type: "string" },
+				Level: { type: "integer" },
+				userRole: { type: "string" },
+				avatar: { type: "integer" },
+				company: { type: "string" },
+				contact: { type: "integer" },
+				plan: { type: "string" },
+			},
+			additionalProperties: false,
+			definitions: {},
+			required: [
+				"username",
+				"email",
+				"provider",
+				"password",
+				"resetPasswordToken",
+				"confirmationToken",
+				"confirmed",
+				"blocked",
+				"role",
+				"Level",
+				"userRole",
+				"avatar",
+				"company",
+				"contact",
+				"plan",
+			],
+		},
+		response: {
+			type: "object",
+			properties: {
+				data: {
+					type: "object",
+					properties: {
+						backend_createUsersPermissionsUser: {
+							type: "object",
+							properties: {
+								data: { type: "object", properties: { id: { type: "string" } }, additionalProperties: false },
+							},
+							additionalProperties: false,
+						},
+					},
+					additionalProperties: false,
+					required: ["backend_createUsersPermissionsUser"],
 				},
 			},
 			additionalProperties: false,

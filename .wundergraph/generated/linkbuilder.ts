@@ -466,12 +466,17 @@ interface TargetTypes {
 		| "Level"
 		| "avatar"
 		| "blocked"
+		| "company"
 		| "confirmed"
+		| "contact"
+		| "country"
 		| "createdAt"
 		| "email"
+		| "plan"
 		| "provider"
 		| "role"
 		| "updatedAt"
+		| "userRole"
 		| "username"
 		| "_join";
 	backend_UsersPermissionsUserEntity: "attributes" | "id" | "_join";

@@ -2,6 +2,10 @@
 
 import {
 	AlldrugsResponse,
+	CreateUserResponse,
+	CreateUserInput,
+	InternalCreateUserInput,
+	InjectedCreateUserInput,
 	DragonsResponse,
 	LoginResponse,
 	LoginInput,
@@ -32,7 +36,7 @@ export type SKIP = "skip";
 // this is semantically equal to throwing an error (500)
 export type CANCEL = "cancel";
 
-export type WUNDERGRAPH_OPERATION = "Alldrugs" | "Dragons" | "Login" | "NewDrug";
+export type WUNDERGRAPH_OPERATION = "Alldrugs" | "CreateUser" | "Dragons" | "Login" | "NewDrug";
 
 export type DATA_SOURCES = never;
 
@@ -151,6 +155,18 @@ export interface Queries {
 }
 
 export interface Mutations {
+	CreateUser?: {
+		mockResolve?: (hook: HookRequestWithInput<InjectedCreateUserInput>) => Promise<CreateUserResponse>;
+		preResolve?: (hook: HookRequestWithInput<InjectedCreateUserInput>) => Promise<void>;
+		mutatingPreResolve?: (hook: HookRequestWithInput<InjectedCreateUserInput>) => Promise<InjectedCreateUserInput>;
+		postResolve?: (
+			hook: HookRequestWithInput<InjectedCreateUserInput> & HookRequestWithResponse<CreateUserResponse>
+		) => Promise<void>;
+		customResolve?: (hook: HookRequestWithInput<InjectedCreateUserInput>) => Promise<void | CreateUserResponse>;
+		mutatingPostResolve?: (
+			hook: HookRequestWithInput<InjectedCreateUserInput> & HookRequestWithResponse<CreateUserResponse>
+		) => Promise<CreateUserResponse>;
+	};
 	Login?: {
 		mockResolve?: (hook: HookRequestWithInput<InjectedLoginInput>) => Promise<LoginResponse>;
 		preResolve?: (hook: HookRequestWithInput<InjectedLoginInput>) => Promise<void>;

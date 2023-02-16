@@ -29,6 +29,9 @@ import { useDispatch } from 'react-redux'
 // ** Actions Imports
 import { addUser } from 'src/store/apps/user'
 
+// wundergrapn
+import {useMutation} from '../../../../hooks/useWundergraph'
+
 const showErrors = (field, valueLen, min) => {
   if (valueLen === 0) {
     return `${field} field is required`
@@ -97,10 +100,40 @@ const SidebarAddUser = props => {
     mode: 'onChange',
     resolver: yupResolver(schema)
   })
+  
+  const {mutate}=useMutation({
+    operationName:'CreateUser',
+    onSuccess:()=>{
+      console.log('user create success')
+    },
+    onError:()=>{
+      console.log('user create error')
+    }
+  })
 
   const onSubmit = data => {
     dispatch(addUser({ ...data, role, currentPlan: plan }))
-    
+
+    // wundergraph
+    mutate({
+      username:data.username,
+      email:data.email,
+      provider:'',
+      password:'123123123',
+      resetPasswordToken:'',
+      confirmationToken:'',
+      confirmed:true,
+      blocked:false,
+      role:1,
+      Level:2,
+      userRole:role,
+      avatar:1,
+      company:data.company,
+      contact:data.contact,
+      plan:plan
+      
+    })
+
     toggle()
     reset()
   }
