@@ -4,7 +4,15 @@
 import { JSONSchema7 } from "json-schema";
 
 interface Schema {
+	AllPatients: {
+		input: JSONSchema7;
+		response: JSONSchema7;
+	};
 	Alldrugs: {
+		input: JSONSchema7;
+		response: JSONSchema7;
+	};
+	CreatePatient: {
 		input: JSONSchema7;
 		response: JSONSchema7;
 	};
@@ -39,6 +47,59 @@ interface Schema {
 }
 
 const jsonSchema: Schema = {
+	AllPatients: {
+		input: {
+			type: "object",
+			properties: { creatorId: { type: "string" } },
+			additionalProperties: false,
+			definitions: {},
+			required: ["creatorId"],
+		},
+		response: {
+			type: "object",
+			properties: {
+				data: {
+					type: "object",
+					properties: {
+						backend_patients: {
+							type: "object",
+							properties: {
+								data: {
+									type: "array",
+									items: {
+										type: "object",
+										properties: {
+											id: { type: "string" },
+											attributes: {
+												type: "object",
+												properties: {
+													username: { type: "string" },
+													origin: { type: "string" },
+													weightSegment: { type: "string" },
+													ageSegment: { type: "string" },
+													diet: { type: "string" },
+													ethnicity: { type: "string" },
+													country: { type: "string" },
+													PCP: { type: "string" },
+													sleep: { type: "boolean" },
+												},
+												additionalProperties: false,
+											},
+										},
+										additionalProperties: false,
+									},
+								},
+							},
+							additionalProperties: false,
+							required: ["data"],
+						},
+					},
+					additionalProperties: false,
+				},
+			},
+			additionalProperties: false,
+		},
+	},
 	Alldrugs: {
 		input: { type: "object", properties: {}, additionalProperties: false, definitions: {} },
 		response: {
@@ -68,6 +129,56 @@ const jsonSchema: Schema = {
 							},
 							additionalProperties: false,
 							required: ["data"],
+						},
+					},
+					additionalProperties: false,
+				},
+			},
+			additionalProperties: false,
+		},
+	},
+	CreatePatient: {
+		input: {
+			type: "object",
+			properties: {
+				username: { type: "string" },
+				origin: { type: "string" },
+				weightSegment: { type: "string" },
+				ageSegment: { type: "string" },
+				diet: { type: "string" },
+				ethnicity: { type: "string" },
+				country: { type: "string" },
+				PCP: { type: "string" },
+				sleep: { type: "boolean" },
+				creatorId: { type: "string" },
+			},
+			additionalProperties: false,
+			definitions: {},
+			required: [
+				"username",
+				"origin",
+				"weightSegment",
+				"ageSegment",
+				"diet",
+				"ethnicity",
+				"country",
+				"PCP",
+				"sleep",
+				"creatorId",
+			],
+		},
+		response: {
+			type: "object",
+			properties: {
+				data: {
+					type: "object",
+					properties: {
+						backend_createPatient: {
+							type: "object",
+							properties: {
+								data: { type: "object", properties: { id: { type: "string" } }, additionalProperties: false },
+							},
+							additionalProperties: false,
 						},
 					},
 					additionalProperties: false,

@@ -14,6 +14,23 @@ export interface GraphQLError {
 	path?: ReadonlyArray<string | number>;
 }
 
+export interface AllPatientsInput {
+	creatorId: string;
+}
+
+export interface CreatePatientInput {
+	username: string;
+	origin: string;
+	weightSegment: string;
+	ageSegment: string;
+	diet: string;
+	ethnicity: string;
+	country: string;
+	PCP: string;
+	sleep: boolean;
+	creatorId: string;
+}
+
 export interface CreateUserInput {
 	username: string;
 	email: string;
@@ -42,6 +59,23 @@ export type UsersGetInput = ExtractInput<typeof function_UsersGet>;
 export type UsersSubscribeInput = ExtractInput<typeof function_UsersSubscribe>;
 
 export type UsersUpdateInput = ExtractInput<typeof function_UsersUpdate>;
+
+export interface InternalAllPatientsInput {
+	creatorId: string;
+}
+
+export interface InternalCreatePatientInput {
+	username: string;
+	origin: string;
+	weightSegment: string;
+	ageSegment: string;
+	diet: string;
+	ethnicity: string;
+	country: string;
+	PCP: string;
+	sleep: boolean;
+	creatorId: string;
+}
 
 export interface InternalCreateUserInput {
 	username: string;
@@ -80,6 +114,23 @@ export interface InternalUsersUpdateInput {
 	bio: string;
 }
 
+export interface InjectedAllPatientsInput {
+	creatorId: string;
+}
+
+export interface InjectedCreatePatientInput {
+	username: string;
+	origin: string;
+	weightSegment: string;
+	ageSegment: string;
+	diet: string;
+	ethnicity: string;
+	country: string;
+	PCP: string;
+	sleep: boolean;
+	creatorId: string;
+}
+
 export interface InjectedCreateUserInput {
 	username: string;
 	email: string;
@@ -103,8 +154,18 @@ export interface InjectedLoginInput {
 	password: string;
 }
 
+export interface AllPatientsResponse {
+	data?: AllPatientsResponseData;
+	errors?: ReadonlyArray<GraphQLError>;
+}
+
 export interface AlldrugsResponse {
 	data?: AlldrugsResponseData;
+	errors?: ReadonlyArray<GraphQLError>;
+}
+
+export interface CreatePatientResponse {
+	data?: CreatePatientResponseData;
 	errors?: ReadonlyArray<GraphQLError>;
 }
 
@@ -143,6 +204,25 @@ export interface UsersUpdateResponse {
 	errors?: ReadonlyArray<GraphQLError>;
 }
 
+export interface AllPatientsResponseData {
+	backend_patients?: {
+		data: {
+			id?: string;
+			attributes?: {
+				username?: string;
+				origin?: string;
+				weightSegment?: string;
+				ageSegment?: string;
+				diet?: string;
+				ethnicity?: string;
+				country?: string;
+				PCP?: string;
+				sleep?: boolean;
+			};
+		}[];
+	};
+}
+
 export interface AlldrugsResponseData {
 	backend_drugs?: {
 		data: {
@@ -151,6 +231,14 @@ export interface AlldrugsResponseData {
 				title?: string;
 			};
 		}[];
+	};
+}
+
+export interface CreatePatientResponseData {
+	backend_createPatient?: {
+		data?: {
+			id?: string;
+		};
 	};
 }
 

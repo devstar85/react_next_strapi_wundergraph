@@ -12,6 +12,42 @@
       },
       "item": [
         {
+          "id": "AllPatients",
+          "name": "AllPatients",
+          "request": {
+            "url": {
+              "path": [
+                "operations",
+                "AllPatients"
+              ],
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "creatorId",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [],
+          "event": []
+        },
+        {
           "id": "Alldrugs",
           "name": "Alldrugs",
           "request": {
@@ -151,6 +187,121 @@
         "type": "text/plain"
       },
       "item": [
+        {
+          "id": "CreatePatient",
+          "name": "CreatePatient",
+          "request": {
+            "url": {
+              "path": [
+                "operations",
+                "CreatePatient"
+              ],
+              "host": [
+                "{{apiBaseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "username",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "origin",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "weightSegment",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "ageSegment",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "diet",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "ethnicity",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "country",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "PCP",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type boolean, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "sleep",
+                  "value": ""
+                },
+                {
+                  "disabled": true,
+                  "description": {
+                    "content": "Type string, Optional",
+                    "type": "text/plain"
+                  },
+                  "key": "creatorId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": []
+        },
         {
           "id": "CreateUser",
           "name": "CreateUser",

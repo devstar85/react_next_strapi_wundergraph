@@ -2,7 +2,15 @@
 
 import type { Operation } from "@wundergraph/sdk/server";
 import {
+	AllPatientsResponse,
+	AllPatientsInput,
+	InternalAllPatientsInput,
+	InjectedAllPatientsInput,
 	AlldrugsResponse,
+	CreatePatientResponse,
+	CreatePatientInput,
+	InternalCreatePatientInput,
+	InjectedCreatePatientInput,
 	CreateUserResponse,
 	CreateUserInput,
 	InternalCreateUserInput,
@@ -25,12 +33,14 @@ import {
 } from "./models";
 
 export interface Queries {
+	AllPatients: { input: InternalAllPatientsInput; response: AllPatientsResponse };
 	Alldrugs: { input: never; response: AlldrugsResponse };
 	Dragons: { input: never; response: DragonsResponse };
 	"users/get": { input: InternalUsersGetInput; response: UsersGetResponse };
 }
 
 export interface Mutations {
+	CreatePatient: { input: InternalCreatePatientInput; response: CreatePatientResponse };
 	CreateUser: { input: InternalCreateUserInput; response: CreateUserResponse };
 	Login: { input: InternalLoginInput; response: LoginResponse };
 	newDrug: { input: never; response: NewDrugResponse };

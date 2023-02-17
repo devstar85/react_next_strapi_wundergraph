@@ -797,7 +797,7 @@ type Query {
   backend_i18NLocales(filters: backend_I18NLocaleFiltersInput, pagination: backend_PaginationArg = {}, sort: [String] = []): backend_I18NLocaleEntityResponseCollection
   backend_me: backend_UsersPermissionsMe
   backend_patient(id: ID): backend_PatientEntityResponse
-  backend_patients(filters: backend_PatientFiltersInput, pagination: backend_PaginationArg = {}, publicationState: backend_PublicationState = LIVE, sort: [String] = []): backend_PatientEntityResponseCollection
+  backend_patients(filters: backend_PatientFiltersInput, pagination: backend_PaginationArg = {}, sort: [String] = []): backend_PatientEntityResponseCollection
   backend_uploadFile(id: ID): backend_UploadFileEntityResponse
   backend_uploadFiles(filters: backend_UploadFileFiltersInput, pagination: backend_PaginationArg = {}, sort: [String] = []): backend_UploadFileEntityResponseCollection
   backend_uploadFolder(id: ID): backend_UploadFolderEntityResponse
@@ -1036,18 +1036,6 @@ type backend_ComponentSymptomsSymptomsIcant {
   Sleep: Boolean
   id: ID!
   _join: Query!
-}
-
-input backend_ComponentSymptomsSymptomsIcantFiltersInput {
-  Sleep: backend_BooleanFilterInput
-  and: [backend_ComponentSymptomsSymptomsIcantFiltersInput]
-  not: backend_ComponentSymptomsSymptomsIcantFiltersInput
-  or: [backend_ComponentSymptomsSymptomsIcantFiltersInput]
-}
-
-input backend_ComponentSymptomsSymptomsIcantInput {
-  Sleep: Boolean
-  id: ID
 }
 
 """
@@ -1325,16 +1313,15 @@ input backend_PaginationArg {
 }
 
 type backend_Patient {
-  Origin: String
   PCP: String
   ageSegment: String
-  code: String
   country: String
   createdAt: DateTime
+  creatorId: String
   diet: String
   ethnicity: String
-  publishedAt: DateTime
-  symptonsIcannot(filters: backend_ComponentSymptomsSymptomsIcantFiltersInput, pagination: backend_PaginationArg = {}, sort: [String] = []): [backend_ComponentSymptomsSymptomsIcant]
+  origin: String
+  sleep: Boolean
   updatedAt: DateTime
   username: String
   weightSegment: String
@@ -1359,35 +1346,33 @@ type backend_PatientEntityResponseCollection {
 }
 
 input backend_PatientFiltersInput {
-  Origin: backend_StringFilterInput
   PCP: backend_StringFilterInput
   ageSegment: backend_StringFilterInput
   and: [backend_PatientFiltersInput]
-  code: backend_StringFilterInput
   country: backend_StringFilterInput
   createdAt: backend_DateTimeFilterInput
+  creatorId: backend_StringFilterInput
   diet: backend_StringFilterInput
   ethnicity: backend_StringFilterInput
   id: backend_IDFilterInput
   not: backend_PatientFiltersInput
   or: [backend_PatientFiltersInput]
-  publishedAt: backend_DateTimeFilterInput
-  symptonsIcannot: backend_ComponentSymptomsSymptomsIcantFiltersInput
+  origin: backend_StringFilterInput
+  sleep: backend_BooleanFilterInput
   updatedAt: backend_DateTimeFilterInput
   username: backend_StringFilterInput
   weightSegment: backend_StringFilterInput
 }
 
 input backend_PatientInput {
-  Origin: String
   PCP: String
   ageSegment: String
-  code: String
   country: String
+  creatorId: String
   diet: String
   ethnicity: String
-  publishedAt: DateTime
-  symptonsIcannot: [backend_ComponentSymptomsSymptomsIcantInput]
+  origin: String
+  sleep: Boolean
   username: String
   weightSegment: String
 }

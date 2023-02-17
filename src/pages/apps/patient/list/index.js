@@ -36,7 +36,7 @@ import CardStatisticsHorizontal from 'src/@core/components/card-statistics/card-
 import { getInitials } from 'src/@core/utils/get-initials'
 
 // ** Actions Imports
-import { fetchData, deleteUser } from 'src/store/apps/user'
+import { fetchData, deleteUser } from 'src/store/apps/patient'
 
 // ** Third Party Components
 import axios from 'axios'
@@ -44,6 +44,9 @@ import axios from 'axios'
 // ** Custom Table Components Imports
 import TableHeader from 'src/views/apps/patient/list/TableHeader'
 import AddUserDrawer from 'src/views/apps/patient/list/AddUserDrawer'
+
+// wundergraph
+import { useQuery } from 'src/hooks/useWundergraph'
 
 // ** Vars
 const userRoleObj = {
@@ -156,61 +159,53 @@ const columns = [
     flex: 0.2,
     minWidth: 230,
     field: 'fullName',
-    headerName: 'User',
+    headerName: 'Patient',
     renderCell: ({ row }) => {
-      const { fullName, username } = row
-
+      const { username } = row.attributes
       return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(row)}
-          <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
-            <StyledLink href='/apps/patient/view/overview/'>{fullName}</StyledLink>
-            <Typography noWrap variant='caption'>
-              {`@${username}`}
-            </Typography>
-          </Box>
-        </Box>
+        <Typography noWrap variant='body2'>
+          {`${username}`}
+        </Typography>
       )
     }
   },
   {
     flex: 0.2,
     minWidth: 250,
-    field: 'email',
-    headerName: 'Email',
+    field: 'age',
+    headerName: 'Age',
     renderCell: ({ row }) => {
       return (
         <Typography noWrap variant='body2'>
-          {row.email}
+          {row.attributes.ageSegment}
         </Typography>
       )
     }
   },
   {
     flex: 0.15,
-    field: 'role',
+    field: 'origin',
     minWidth: 150,
-    headerName: 'Role',
+    headerName: 'Origin',
     renderCell: ({ row }) => {
       return (
-        <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 3, color: userRoleObj[row.role].color } }}>
-          <Icon icon={userRoleObj[row.role].icon} fontSize={20} />
-          <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
-            {row.role}
-          </Typography>
-        </Box>
+
+        <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
+          {row.attributes.origin}
+        </Typography>
+
       )
     }
   },
   {
     flex: 0.15,
     minWidth: 120,
-    headerName: 'Plan',
-    field: 'currentPlan',
+    headerName: 'Diet',
+    field: 'diet',
     renderCell: ({ row }) => {
       return (
         <Typography noWrap sx={{ textTransform: 'capitalize' }}>
-          {row.currentPlan}
+          {row.attributes.diet}
         </Typography>
       )
     }
@@ -218,17 +213,13 @@ const columns = [
   {
     flex: 0.1,
     minWidth: 110,
-    field: 'status',
-    headerName: 'Status',
+    field: 'country',
+    headerName: 'Country',
     renderCell: ({ row }) => {
       return (
-        <CustomChip
-          skin='light'
-          size='small'
-          label={row.status}
-          color={userStatusObj[row.status]}
-          sx={{ textTransform: 'capitalize' }}
-        />
+        <Typography noWrap sx={{ textTransform: 'capitalize' }}>
+          {row.attributes.country}
+        </Typography>
       )
     }
   },
@@ -253,17 +244,33 @@ const UserList = ({ apiData }) => {
 
   // ** Hooks
   const dispatch = useDispatch()
-  const store = useSelector(state => state.user)
+  const store = useSelector(state => state.patient)
+  // useEffect(() => {
+  //   dispatch(
+  //     fetchData({
+  //       role,
+  //       status,
+  //       q: value,
+  //       currentPlan: plan
+  //     })
+  //   )
+  // }, [dispatch, plan, role, status, value])
+  const [userId, setUserId] = useState('')
+
   useEffect(() => {
-    dispatch(
-      fetchData({
-        role,
-        status,
-        q: value,
-        currentPlan: plan
-      })
-    )
-  }, [dispatch, plan, role, status, value])
+    setUserId(JSON.parse(window.localStorage.getItem('userData'))?.id)
+
+  }, [useQuery])
+
+  const { data } = useQuery({
+    operationName: 'AllPatients',
+    input: {
+      creatorId: userId
+    }
+  })
+  console.log(data)
+
+
 
   const handleFilter = useCallback(val => {
     setValue(val)
@@ -366,16 +373,19 @@ const UserList = ({ apiData }) => {
           </CardContent>
           <Divider />
           <TableHeader value={value} handleFilter={handleFilter} toggle={toggleAddUserDrawer} />
-          <DataGrid
-            autoHeight
-            rows={store.data}
-            columns={columns}
-            checkboxSelection
-            pageSize={pageSize}
-            disableSelectionOnClick
-            rowsPerPageOptions={[10, 25, 50]}
-            onPageSizeChange={newPageSize => setPageSize(newPageSize)}
-          />
+          {
+            data?.backend_patients?.data && <DataGrid
+              autoHeight
+              rows={data?.backend_patients?.data}
+              columns={columns}
+              checkboxSelection
+              pageSize={pageSize}
+              disableSelectionOnClick
+              rowsPerPageOptions={[10, 25, 50]}
+              onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+            />
+          }
+
         </Card>
       </Grid>
 

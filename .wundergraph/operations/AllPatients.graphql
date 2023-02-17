@@ -1,0 +1,18 @@
+query AllPatients($creatorId: String!) {
+  backend_patients(filters: { creatorId: {eq:$creatorId} }) {
+    data {
+      id
+      attributes {
+        username,
+        origin,
+        weightSegment,
+        ageSegment,
+        diet,
+        ethnicity,
+        country,
+        PCP,
+        sleep
+      }
+    }
+  }
+}

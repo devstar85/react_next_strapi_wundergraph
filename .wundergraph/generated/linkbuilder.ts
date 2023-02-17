@@ -385,16 +385,15 @@ interface TargetTypes {
 	backend_I18NLocaleEntityResponseCollection: "data" | "meta" | "_join";
 	backend_Pagination: "page" | "pageCount" | "pageSize" | "total" | "_join";
 	backend_Patient:
-		| "Origin"
 		| "PCP"
 		| "ageSegment"
-		| "code"
 		| "country"
 		| "createdAt"
+		| "creatorId"
 		| "diet"
 		| "ethnicity"
-		| "publishedAt"
-		| "symptonsIcannot"
+		| "origin"
+		| "sleep"
 		| "updatedAt"
 		| "username"
 		| "weightSegment"
@@ -686,7 +685,6 @@ interface SourceFields {
 	backend_patients: {
 		filters: null;
 		pagination: null;
-		publicationState: null;
 		sort: null;
 	};
 	backend_uploadFile: {

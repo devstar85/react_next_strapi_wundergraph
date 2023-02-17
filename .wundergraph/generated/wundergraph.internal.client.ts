@@ -2,7 +2,15 @@
 
 import type { OperationArgsWithInput, InternalClient as BaseClient } from "@wundergraph/sdk/server";
 import {
+	AllPatientsResponse,
+	AllPatientsInput,
+	InternalAllPatientsInput,
+	InjectedAllPatientsInput,
 	AlldrugsResponse,
+	CreatePatientResponse,
+	CreatePatientInput,
+	InternalCreatePatientInput,
+	InjectedCreatePatientInput,
 	CreateUserResponse,
 	CreateUserInput,
 	InternalCreateUserInput,
@@ -25,12 +33,14 @@ import {
 } from "./models";
 
 export interface Queries {
+	AllPatients: (options: OperationArgsWithInput<InternalAllPatientsInput>) => Promise<AllPatientsResponse>;
 	Alldrugs: () => Promise<AlldrugsResponse>;
 	Dragons: () => Promise<DragonsResponse>;
 	UsersGet: (options: OperationArgsWithInput<InternalUsersGetInput>) => Promise<UsersGetResponse>;
 }
 
 export interface Mutations {
+	CreatePatient: (options: OperationArgsWithInput<CreatePatientInput>) => Promise<CreatePatientResponse>;
 	CreateUser: (options: OperationArgsWithInput<CreateUserInput>) => Promise<CreateUserResponse>;
 	Login: (options: OperationArgsWithInput<LoginInput>) => Promise<LoginResponse>;
 	NewDrug: () => Promise<NewDrugResponse>;

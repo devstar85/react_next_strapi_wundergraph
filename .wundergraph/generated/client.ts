@@ -13,8 +13,14 @@ import {
 	FetchUserRequestOptions,
 } from "@wundergraph/sdk/client";
 import type {
+	AllPatientsResponse,
+	AllPatientsInput,
+	AllPatientsResponseData,
 	AlldrugsResponse,
 	AlldrugsResponseData,
+	CreatePatientResponse,
+	CreatePatientInput,
+	CreatePatientResponseData,
 	CreateUserResponse,
 	CreateUserInput,
 	CreateUserResponseData,
@@ -42,13 +48,19 @@ export const WUNDERGRAPH_S3_ENABLED = false;
 export const WUNDERGRAPH_AUTH_ENABLED = false;
 
 export const defaultClientConfig: ClientConfig = {
-	applicationHash: "b210d7fd",
+	applicationHash: "1c71f7fd",
 	baseURL: "http://localhost:9991",
 	sdkVersion: "0.134.0",
 };
 
 export const operationMetadata: OperationMetadata = {
+	AllPatients: {
+		requiresAuthentication: false,
+	},
 	Alldrugs: {
+		requiresAuthentication: false,
+	},
+	CreatePatient: {
 		requiresAuthentication: false,
 	},
 	CreateUser: {
@@ -119,6 +131,12 @@ export const createClient = (config?: CreateClientConfig) => {
 };
 
 export type Queries = {
+	AllPatients: {
+		input: AllPatientsInput;
+		data: AllPatientsResponseData;
+		requiresAuthentication: false;
+		liveQuery: boolean;
+	};
 	Alldrugs: {
 		input?: undefined;
 		data: AlldrugsResponseData;
@@ -140,6 +158,11 @@ export type Queries = {
 };
 
 export type Mutations = {
+	CreatePatient: {
+		input: CreatePatientInput;
+		data: CreatePatientResponseData;
+		requiresAuthentication: false;
+	};
 	CreateUser: {
 		input: CreateUserInput;
 		data: CreateUserResponseData;
@@ -171,6 +194,12 @@ export type Subscriptions = {
 };
 
 export type LiveQueries = {
+	AllPatients: {
+		input: AllPatientsInput;
+		data: AllPatientsResponseData;
+		liveQuery: true;
+		requiresAuthentication: false;
+	};
 	Alldrugs: {
 		input?: undefined;
 		data: AlldrugsResponseData;

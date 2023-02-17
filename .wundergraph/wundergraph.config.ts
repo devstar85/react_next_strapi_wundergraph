@@ -6,7 +6,7 @@ const strapi = introspect.graphql({
 	apiNamespace: 'backend',
 	url: 'http://localhost:1337/graphql',
 	headers: (builder) =>
-    builder.addClientRequestHeader('Authorization', 'Authorization'),
+    	builder.addClientRequestHeader('Authorization', 'Authorization'),
 })
 const spaceX = introspect.graphql({
 	apiNamespace: 'spacex',

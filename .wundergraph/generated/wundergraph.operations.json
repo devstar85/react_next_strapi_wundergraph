@@ -1,10 +1,22 @@
 {
   "graphql_operation_files": [
     {
+      "operation_name": "AllPatients",
+      "api_mount_path": "AllPatients",
+      "file_path": "AllPatients.graphql",
+      "content": "query AllPatients($creatorId: String!){backend_patients(filters: {creatorId: {eq: $creatorId}}){data {id attributes {username origin weightSegment ageSegment diet ethnicity country PCP sleep}}}}"
+    },
+    {
       "operation_name": "Alldrugs",
       "api_mount_path": "Alldrugs",
       "file_path": "Alldrugs.graphql",
       "content": "query Alldrugs {backend_drugs {data {id attributes {title}}}}"
+    },
+    {
+      "operation_name": "CreatePatient",
+      "api_mount_path": "CreatePatient",
+      "file_path": "CreatePatient.graphql",
+      "content": "mutation CreatePatient($username: String!, $origin: String!, $weightSegment: String!, $ageSegment: String!, $diet: String!, $ethnicity: String!, $country: String!, $PCP: String!, $sleep: Boolean!, $creatorId: String!){backend_createPatient(data: {username: $username,origin: $origin,weightSegment: $weightSegment,ageSegment: $ageSegment,diet: $diet,ethnicity: $ethnicity,country: $country,PCP: $PCP,sleep: $sleep,creatorId: $creatorId}){data {id}}}"
     },
     {
       "operation_name": "CreateUser",

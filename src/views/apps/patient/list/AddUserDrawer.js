@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // ** MUI Imports
 import Drawer from '@mui/material/Drawer'
@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import FormHelperText from '@mui/material/FormHelperText'
+import { Checkbox } from '@mui/material'
 
 // ** Third Party Imports
 import * as yup from 'yup'
@@ -27,7 +28,9 @@ import Icon from 'src/@core/components/icon'
 import { useDispatch } from 'react-redux'
 
 // ** Actions Imports
-import { addUser } from 'src/store/apps/user'
+import { addPatient } from 'src/store/apps/patient'
+
+import { useMutation } from 'src/hooks/useWundergraph'
 
 const showErrors = (field, valueLen, min) => {
   if (valueLen === 0) {
@@ -48,31 +51,22 @@ const Header = styled(Box)(({ theme }) => ({
 }))
 
 const schema = yup.object().shape({
-  company: yup.string().required(),
+  username: yup.string().required(),
   country: yup.string().required(),
-  email: yup.string().email().required(),
-  contact: yup
-    .number()
-    .typeError('Contact Number field is required')
-    .min(10, obj => showErrors('Contact Number', obj.value.length, obj.min))
-    .required(),
-  fullName: yup
-    .string()
-    .min(3, obj => showErrors('First Name', obj.value.length, obj.min))
-    .required(),
-  username: yup
-    .string()
-    .min(3, obj => showErrors('Username', obj.value.length, obj.min))
-    .required()
+  origin: yup.string().required(),
+
 })
 
 const defaultValues = {
-  email: '',
-  company: '',
-  country: '',
-  fullName: '',
   username: '',
-  contact: Number('')
+  origin: '',
+  weightSegment: '',
+  ageSegment: '',
+  diet: '',
+  ethnicity: '',
+  country: '',
+  PCP: '',
+  sleep: false
 }
 
 const SidebarAddUser = props => {
@@ -82,6 +76,7 @@ const SidebarAddUser = props => {
   // ** State
   const [plan, setPlan] = useState('basic')
   const [role, setRole] = useState('subscriber')
+  const [creatorId, setCreatorId] = useState('')
 
   // ** Hooks
   const dispatch = useDispatch()
@@ -98,8 +93,20 @@ const SidebarAddUser = props => {
     resolver: yupResolver(schema)
   })
 
+  const { mutate } = useMutation({
+    operationName: 'CreatePatient'
+  })
+  useEffect(()=>{
+    setCreatorId(JSON.parse(window.localStorage.getItem('userData'))?.id)
+  },[])
+  
+
   const onSubmit = data => {
-    dispatch(addUser({ ...data, role, currentPlan: plan }))
+    // dispatch(addPatient({ ...data}))
+    mutate({
+      ...data, creatorId
+    })
+
     toggle()
     reset()
   }
@@ -131,32 +138,15 @@ const SidebarAddUser = props => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl fullWidth sx={{ mb: 6 }}>
             <Controller
-              name='fullName'
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { value, onChange } }) => (
-                <TextField
-                  value={value}
-                  label='Full Name'
-                  onChange={onChange}
-                  placeholder='John Doe'
-                  error={Boolean(errors.fullName)}
-                />
-              )}
-            />
-            {errors.fullName && <FormHelperText sx={{ color: 'error.main' }}>{errors.fullName.message}</FormHelperText>}
-          </FormControl>
-          <FormControl fullWidth sx={{ mb: 6 }}>
-            <Controller
               name='username'
               control={control}
               rules={{ required: true }}
               render={({ field: { value, onChange } }) => (
                 <TextField
                   value={value}
-                  label='Username'
+                  label='User Name'
                   onChange={onChange}
-                  placeholder='johndoe'
+                  placeholder='JohnDoe'
                   error={Boolean(errors.username)}
                 />
               )}
@@ -165,38 +155,88 @@ const SidebarAddUser = props => {
           </FormControl>
           <FormControl fullWidth sx={{ mb: 6 }}>
             <Controller
-              name='email'
+              name='origin'
               control={control}
               rules={{ required: true }}
               render={({ field: { value, onChange } }) => (
                 <TextField
-                  type='email'
                   value={value}
-                  label='Email'
+                  label='Origin'
                   onChange={onChange}
-                  placeholder='johndoe@email.com'
-                  error={Boolean(errors.email)}
+                  placeholder='origin'
+                  error={Boolean(errors.origin)}
                 />
               )}
             />
-            {errors.email && <FormHelperText sx={{ color: 'error.main' }}>{errors.email.message}</FormHelperText>}
+            {errors.origin && <FormHelperText sx={{ color: 'error.main' }}>{errors.origin.message}</FormHelperText>}
           </FormControl>
           <FormControl fullWidth sx={{ mb: 6 }}>
             <Controller
-              name='company'
+              name='weightSegment'
               control={control}
               rules={{ required: true }}
               render={({ field: { value, onChange } }) => (
                 <TextField
                   value={value}
-                  label='Company'
+                  label='Weight'
                   onChange={onChange}
-                  placeholder='Company PVT LTD'
-                  error={Boolean(errors.company)}
+                  placeholder=''
+                  error={Boolean(errors.weightSegment)}
                 />
               )}
             />
-            {errors.company && <FormHelperText sx={{ color: 'error.main' }}>{errors.company.message}</FormHelperText>}
+            {errors.weightSegment && <FormHelperText sx={{ color: 'error.main' }}>{errors.seightSegment.message}</FormHelperText>}
+          </FormControl>
+          <FormControl fullWidth sx={{ mb: 6 }}>
+            <Controller
+              name='ageSegment'
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { value, onChange } }) => (
+                <TextField
+                  value={value}
+                  label='Age'
+                  onChange={onChange}
+                  placeholder=''
+                  error={Boolean(errors.ageSegment)}
+                />
+              )}
+            />
+            {errors.ageSegment && <FormHelperText sx={{ color: 'error.main' }}>{errors.ageSegment.message}</FormHelperText>}
+          </FormControl>
+          <FormControl fullWidth sx={{ mb: 6 }}>
+            <Controller
+              name='diet'
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { value, onChange } }) => (
+                <TextField
+                  value={value}
+                  label='Diet'
+                  onChange={onChange}
+                  placeholder='Australia'
+                  error={Boolean(errors.diet)}
+                />
+              )}
+            />
+            {errors.diet && <FormHelperText sx={{ color: 'error.main' }}>{errors.diet.message}</FormHelperText>}
+          </FormControl>
+          <FormControl fullWidth sx={{ mb: 6 }}>
+            <Controller
+              name='ethnicity'
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { value, onChange } }) => (
+                <TextField
+                  value={value}
+                  label='Ethnicity'
+                  onChange={onChange}
+                  placeholder=''
+                  error={Boolean(errors.ethnicity)}
+                />
+              )}
+            />
+            {errors.ethnicity && <FormHelperText sx={{ color: 'error.main' }}>{errors.ethnicity.message}</FormHelperText>}
           </FormControl>
           <FormControl fullWidth sx={{ mb: 6 }}>
             <Controller
@@ -208,7 +248,7 @@ const SidebarAddUser = props => {
                   value={value}
                   label='Country'
                   onChange={onChange}
-                  placeholder='Australia'
+                  placeholder=''
                   error={Boolean(errors.country)}
                 />
               )}
@@ -217,56 +257,37 @@ const SidebarAddUser = props => {
           </FormControl>
           <FormControl fullWidth sx={{ mb: 6 }}>
             <Controller
-              name='contact'
+              name='PCP'
               control={control}
               rules={{ required: true }}
               render={({ field: { value, onChange } }) => (
                 <TextField
-                  type='number'
                   value={value}
-                  label='Contact'
+                  label='PCP'
                   onChange={onChange}
-                  placeholder='(397) 294-5153'
-                  error={Boolean(errors.contact)}
+                  placeholder=''
+                  error={Boolean(errors.PCP)}
                 />
               )}
             />
-            {errors.contact && <FormHelperText sx={{ color: 'error.main' }}>{errors.contact.message}</FormHelperText>}
+            {errors.PCP && <FormHelperText sx={{ color: 'error.main' }}>{errors.PCP.message}</FormHelperText>}
           </FormControl>
           <FormControl fullWidth sx={{ mb: 6 }}>
-            <InputLabel id='role-select'>Select Role</InputLabel>
-            <Select
-              fullWidth
-              value={role}
-              id='select-role'
-              label='Select Role'
-              labelId='role-select'
-              onChange={e => setRole(e.target.value)}
-              inputProps={{ placeholder: 'Select Role' }}
-            >
-              <MenuItem value='admin'>Admin</MenuItem>
-              <MenuItem value='author'>Author</MenuItem>
-              <MenuItem value='editor'>Editor</MenuItem>
-              <MenuItem value='maintainer'>Maintainer</MenuItem>
-              <MenuItem value='subscriber'>Subscriber</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl fullWidth sx={{ mb: 6 }}>
-            <InputLabel id='plan-select'>Select Plan</InputLabel>
-            <Select
-              fullWidth
-              value={plan}
-              id='select-plan'
-              label='Select Plan'
-              labelId='plan-select'
-              onChange={e => setPlan(e.target.value)}
-              inputProps={{ placeholder: 'Select Plan' }}
-            >
-              <MenuItem value='basic'>Basic</MenuItem>
-              <MenuItem value='company'>Company</MenuItem>
-              <MenuItem value='enterprise'>Enterprise</MenuItem>
-              <MenuItem value='team'>Team</MenuItem>
-            </Select>
+            <Controller
+              name='sleep'
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { value, onChange } }) => (
+                <Checkbox
+                  value={value}
+                  label='Sleep'
+                  onChange={onChange}
+
+                  error={Boolean(errors.PCP)}
+                />
+              )}
+            />
+            {errors.sleep && <FormHelperText sx={{ color: 'error.main' }}>{errors.sleep.message}</FormHelperText>}
           </FormControl>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Button size='large' type='submit' variant='contained' sx={{ mr: 3 }}>
