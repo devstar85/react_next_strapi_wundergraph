@@ -2,15 +2,18 @@ import { createClient, Operations } from '../../components/generated/client'
 
 
 import { createHooks } from '@wundergraph/react-query'
-var token=''
+var header={
+  // Authorizatoin:''
+}
 if(typeof window !== 'undefined'){
-  token=window.localStorage.getItem('accessToken')
+  if(window.localStorage.getItem('accessToken')!==null){
+    header.Authorization='Bearer ' + window.localStorage.getItem('accessToken')
+  }
+    
 }
 
 export const client = createClient({
-  extraHeaders:{
-    "Authorization":`Bearer ${token}`
-  }
+  extraHeaders:header
 })
 
 export const {
