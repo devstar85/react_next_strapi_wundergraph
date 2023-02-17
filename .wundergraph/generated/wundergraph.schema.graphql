@@ -1716,7 +1716,7 @@ type backend_UsersPermissionsUser {
   blocked: Boolean
   company: String
   confirmed: Boolean
-  contact: Int
+  contact: String
   country: String
   createdAt: DateTime
   email: String!
@@ -1754,7 +1754,7 @@ input backend_UsersPermissionsUserFiltersInput {
   company: backend_StringFilterInput
   confirmationToken: backend_StringFilterInput
   confirmed: backend_BooleanFilterInput
-  contact: backend_IntFilterInput
+  contact: backend_StringFilterInput
   country: backend_StringFilterInput
   createdAt: backend_DateTimeFilterInput
   email: backend_StringFilterInput
@@ -1778,7 +1778,7 @@ input backend_UsersPermissionsUserInput {
   company: String
   confirmationToken: String
   confirmed: Boolean
-  contact: Int
+  contact: String
   country: String
   email: String
   password: String

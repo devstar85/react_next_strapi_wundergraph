@@ -290,7 +290,7 @@
                 {
                   "disabled": true,
                   "description": {
-                    "content": "Type integer, Optional",
+                    "content": "Type string, Optional",
                     "type": "text/plain"
                   },
                   "key": "contact",

@@ -12,7 +12,7 @@ mutation CreateUser(
         $userRole:String!,
         $avatar:Int!,
         $company:String!,
-        $contact:Int!,
+        $contact:String!,
         $plan:String!
     ){
     backend_createUsersPermissionsUser(

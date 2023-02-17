@@ -129,7 +129,7 @@ const SidebarAddUser = props => {
       userRole:role,
       avatar:1,
       company:data.company,
-      contact:data.contact,
+      contact:data.contact.toString(),
       plan:plan
       
     })

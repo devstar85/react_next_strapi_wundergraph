@@ -28,7 +28,7 @@ export interface CreateUserInput {
 	userRole: string;
 	avatar: number;
 	company: string;
-	contact: number;
+	contact: string;
 	plan: string;
 }
 
@@ -57,7 +57,7 @@ export interface InternalCreateUserInput {
 	userRole: string;
 	avatar: number;
 	company: string;
-	contact: number;
+	contact: string;
 	plan: string;
 }
 
@@ -94,7 +94,7 @@ export interface InjectedCreateUserInput {
 	userRole: string;
 	avatar: number;
 	company: string;
-	contact: number;
+	contact: string;
 	plan: string;
 }
 

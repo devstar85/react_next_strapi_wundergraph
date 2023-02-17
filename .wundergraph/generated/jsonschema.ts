@@ -93,7 +93,7 @@ const jsonSchema: Schema = {
 				userRole: { type: "string" },
 				avatar: { type: "integer" },
 				company: { type: "string" },
-				contact: { type: "integer" },
+				contact: { type: "string" },
 				plan: { type: "string" },
 			},
 			additionalProperties: false,
